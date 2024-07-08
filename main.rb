@@ -11,7 +11,12 @@ test_list.prepend('Helen')
 test_list.append('Johnny')
 puts test_list
 puts test_list.size
-puts test_list.head
-puts test_list.tail
-puts test_list.at(4)
-puts test_list.at(1)
+puts test_list.contains?('Johnny')
+# puts test_list.head
+# puts test_list.tail
+# puts test_list.at(4)
+# puts test_list.at(1)
+test_list.pop
+puts test_list
+puts test_list.size
+puts test_list.contains?('Johnny')

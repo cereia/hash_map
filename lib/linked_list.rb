@@ -53,6 +53,21 @@ class LinkedList
     curr if i == index
   end
 
+  def pop
+    @tail = at(size - 2)
+    @tail.next_node = nil
+  end
+
+  def contains?(value)
+    curr = @head
+    until curr.nil?
+      return true if curr.value == value
+
+      curr = curr.next_node
+    end
+    false if curr.nil?
+  end
+
   def to_s
     curr = @head
     str = ''
