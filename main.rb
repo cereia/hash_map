@@ -11,3 +11,5 @@ test_list.prepend('Helen')
 test_list.append('Johnny')
 puts test_list
 puts test_list.size
+puts test_list.head
+puts test_list.tail
