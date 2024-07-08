@@ -10,3 +10,4 @@ test_list.append('Jerry')
 test_list.prepend('Helen')
 test_list.append('Johnny')
 puts test_list
+puts test_list.size

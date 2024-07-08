@@ -30,6 +30,16 @@ class LinkedList
     @head = @head.nil? ? Node.new(value) : Node.new(value, @head)
   end
 
+  def size
+    curr = @head
+    nodes = 0
+    until curr.nil?
+      nodes += 1
+      curr = curr.next_node
+    end
+    nodes
+  end
+
   def to_s
     curr = @head
     str = ''
