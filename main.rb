@@ -7,5 +7,6 @@ test_list = LinkedList.new
 test_list.append('Jason')
 test_list.append('Jen')
 test_list.append('Jerry')
-test_list.append('Helen')
+test_list.prepend('Helen')
+test_list.append('Johnny')
 puts test_list
