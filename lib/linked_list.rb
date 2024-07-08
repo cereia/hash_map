@@ -41,6 +41,18 @@ class LinkedList
     nodes
   end
 
+  def at(index)
+    curr = @head
+    i = 0
+    return 'Out of range' if index > size - 1 || index.negative?
+
+    while i < index
+      curr = curr.next_node
+      i += 1
+    end
+    curr if i == index
+  end
+
   def to_s
     curr = @head
     str = ''

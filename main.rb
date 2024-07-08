@@ -13,3 +13,5 @@ puts test_list
 puts test_list.size
 puts test_list.head
 puts test_list.tail
+puts test_list.at(4)
+puts test_list.at(1)
