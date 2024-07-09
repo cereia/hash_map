@@ -28,3 +28,7 @@ test_list.insert_at('item7', 3)
 puts "list after insert at 3: #{test_list}"
 test_list.remove_at(2)
 puts "list after remove at 2: #{test_list}"
+test_list.insert_at('item12', 12)
+puts "list after insert at 12: #{test_list}"
+test_list.remove_at(12)
+puts "list after remove at 12: #{test_list}"
