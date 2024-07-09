@@ -68,6 +68,19 @@ class LinkedList
     false if curr.nil?
   end
 
+  def find(value)
+    curr = @head
+    i = 0
+
+    until curr.nil?
+      return i if curr.value == value
+
+      curr = curr.next_node
+      i += 1
+    end
+    nil if curr.nil?
+  end
+
   def to_s
     curr = @head
     str = ''

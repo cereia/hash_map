@@ -20,3 +20,5 @@ test_list.pop
 puts test_list
 puts test_list.size
 puts test_list.contains?('Johnny')
+p test_list.find('Jen')
+p test_list.find('Joseph')
