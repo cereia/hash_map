@@ -54,18 +54,14 @@ class LinkedList
   end
 
   def pop
+    # size - 2 is the new last node because index starts at 0, so old tail is at size - 1
     @tail = at(size - 2)
     @tail.next_node = nil
   end
 
   def contains?(value)
-    curr = @head
-    until curr.nil?
-      return true if curr.value == value
-
-      curr = curr.next_node
-    end
-    false if curr.nil?
+    index = find(value)
+    index.nil? ? false : true
   end
 
   def find(value)
@@ -82,7 +78,7 @@ class LinkedList
   end
 
   def insert_at(value, index)
-    return @head = Node.new(value, @head) if at(index) == @head
+    return @head = Node.new(value, @head) if index.zero?
 
     prev_node = at(index - 1)
     new_node = Node.new(value, at(index))
@@ -90,14 +86,14 @@ class LinkedList
   end
 
   def remove_at(index)
-    return @head = @head.next_node if at(index) == @head
+    return @head = @head.next_node if index.zero?
 
+    prev_node = at(index - 1)
     if index == size - 1
-      @tail = at(index - 1)
+      @tail = prev_node
       @tail.next_node = nil
     else
       node_to_remove = at(index)
-      prev_node = at(index - 1)
       prev_node.next_node = node_to_remove.next_node.nil? ? nil : node_to_remove.next_node
     end
   end

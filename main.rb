@@ -11,7 +11,8 @@ test_list.prepend('Helen')
 test_list.append('Johnny')
 puts test_list
 puts "list size: #{test_list.size}"
-# puts test_list.contains?('Johnny')
+puts "contains Johnny?: #{test_list.contains?('Johnny')}"
+puts "contains Zephyr?: #{test_list.contains?('Zephyr')}"
 # puts test_list.head
 # puts test_list.tail
 # puts test_list.at(4)
