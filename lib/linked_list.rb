@@ -81,6 +81,27 @@ class LinkedList
     nil if curr.nil?
   end
 
+  def insert_at(value, index)
+    return @head = Node.new(value, @head) if at(index) == @head
+
+    prev_node = at(index - 1)
+    new_node = Node.new(value, at(index))
+    prev_node.next_node = new_node
+  end
+
+  def remove_at(index)
+    return @head = @head.next_node if at(index) == @head
+
+    if index == size - 1
+      @tail = at(index - 1)
+      @tail.next_node = nil
+    else
+      node_to_remove = at(index)
+      prev_node = at(index - 1)
+      prev_node.next_node = node_to_remove.next_node.nil? ? nil : node_to_remove.next_node
+    end
+  end
+
   def to_s
     curr = @head
     str = ''

@@ -17,3 +17,7 @@ LinkedList will contain these methods:
 - #contains?(value) returns true if the value is in the list and false if it's not
 - #find(value) returns the index of the node if found and nil if not found
 - #to_s represents the list as a string for printing
+
+Extras:
+- #insert_at(value, index) insert new node at given index
+- #delete_at(index) deletes the node at given index
