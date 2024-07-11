@@ -10,25 +10,19 @@ class LinkedList
   end
 
   def append(value)
+    # add new node to the end of the list as the last item
     new_node = Node.new(value)
-    # check if head is empty
-    # - if it is, set this value as the head
-    # - if it's not, set this value as the next node of the current tail
-    if @head.nil?
-      @head = new_node
-    else
-      @tail.next_node = new_node
-    end
-    # set tail to the new node
-    # head and tail are the same node when there's only 1 element in the list
+    # if head is nil, append makes the value the head
+    @head = new_node if @head.nil?
+    # if tail is not nil, the old tail's next node is the new node
+    @tail.next_node = new_node unless @tail.nil?
     @tail = new_node
   end
 
   def prepend(value)
-    # check if head is nil or not
-    #   - set value as the head if it is
-    #   - set value as the new head and old head as the next node
-    @head = @head.nil? ? Node.new(value) : Node.new(value, @head)
+    # add new node to the front of the list as the first item
+    @head = Node.new(value, @head)
+    @tail = Node.new(value) if @tail.nil?
   end
 
   def size
@@ -78,12 +72,16 @@ class LinkedList
   end
 
   def insert_at(value, index)
-    return puts 'Index is out of range' if index > size - 1 || index.negative?
-    return @head = Node.new(value, @head) if index.zero?
-
-    prev_node = at(index - 1)
-    new_node = Node.new(value, at(index))
-    prev_node.next_node = new_node
+    if index.zero?
+      @head = Node.new(value, @head)
+      @tail = Node.new(value) if @tail.nil?
+    elsif index > size - 1 || index.negative?
+      puts 'Index is out of range'
+    else
+      prev_node = at(index - 1)
+      new_node = Node.new(value, at(index))
+      prev_node.next_node = new_node
+    end
   end
 
   def remove_at(index)
