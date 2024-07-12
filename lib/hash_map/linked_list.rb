@@ -2,11 +2,9 @@
 
 # linked list data structure class
 class LinkedList
-  attr_reader :head, :tail, :key, :value
+  attr_reader :head, :tail
 
-  def initialize(key = nil, value = nil)
-    @key = key
-    @value = value
+  def initialize
     @head = nil
     @tail = nil
   end

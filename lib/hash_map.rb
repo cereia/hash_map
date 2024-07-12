@@ -37,14 +37,20 @@ class HashMap
     end
   end
 
+  def get(key)
+    hash_key = hash(key)
+    !@buckets[hash_key]&.find(key).nil? ? @buckets[hash_key].find(key) : nil
+  end
+
+  def has?(key)
+    present = get(key)
+    present ? true : false
+  end
+
   # def grow_buckets
   #   @capacity *= 2
   #   @new_buckets = Array.new(@capacity)
 
-  # end
-
-  # def to_s
-  #   @buckets.map { |bucket| p bucket }
   # end
 
   #   raise IndexError if index.negative? || index >= @buckets.length

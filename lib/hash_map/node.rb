@@ -2,7 +2,7 @@
 
 # linked list node class
 class Node
-  attr_accessor :next_node, :value
+  attr_accessor :next_node, :key, :value
 
   def initialize(key, value, next_node = nil)
     @key = key
@@ -11,6 +11,6 @@ class Node
   end
 
   def to_s
-    "( #{@key}, #{@value} )"
+    "[#{@key}, #{@value}]"
   end
 end

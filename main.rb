@@ -17,4 +17,8 @@ test.set('apple', 'red')
 # test.set('jacket', 'blue')
 # test.set('kite', 'pink')
 # test.set('lion', 'golden')
+puts test.get('apple')
+p test.get('oreo')
+puts test.has?('apple')
+p test.has?('oreo')
 puts test
