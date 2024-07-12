@@ -4,12 +4,13 @@
 class Node
   attr_accessor :next_node, :value
 
-  def initialize(value = nil, next_node = nil)
+  def initialize(key, value, next_node = nil)
+    @key = key
     @value = value
     @next_node = next_node
   end
 
   def to_s
-    "( #{@value} )"
+    "( #{@key}, #{@value} )"
   end
 end

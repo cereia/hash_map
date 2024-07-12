@@ -4,25 +4,23 @@
 class LinkedList
   attr_reader :head, :tail
 
-  def initialize
+  def initialize(key, value)
+    @key = key
+    @value = value
     @head = nil
     @tail = nil
   end
 
-  def append(value)
-    # add new node to the end of the list as the last item
-    new_node = Node.new(value)
-    # if head is nil, append makes the value the head
+  def append(key, value)
+    new_node = Node.new(key, value)
     @head = new_node if @head.nil?
-    # if tail is not nil, the old tail's next node is the new node
     @tail.next_node = new_node unless @tail.nil?
     @tail = new_node
   end
 
-  def prepend(value)
-    # add new node to the front of the list as the first item
-    @head = Node.new(value, @head)
-    @tail = Node.new(value) if @tail.nil?
+  def prepend(key, value)
+    @head = Node.new(key, value, @head)
+    @tail = Node.new(key, value) if @tail.nil?
   end
 
   def size
@@ -48,22 +46,21 @@ class LinkedList
   end
 
   def pop
-    # size - 2 is the new last node because index starts at 0, so old tail is at size - 1
     @tail = at(size - 2)
     @tail.next_node = nil
   end
 
-  def contains?(value)
-    index = find(value)
+  def contains?(key)
+    index = find(key)
     index.nil? ? false : true
   end
 
-  def find(value)
+  def find(key)
     curr = @head
     i = 0
 
     until curr.nil?
-      return i if curr.value == value
+      return i if curr.key == key
 
       curr = curr.next_node
       i += 1
@@ -71,15 +68,15 @@ class LinkedList
     nil if curr.nil?
   end
 
-  def insert_at(value, index)
+  def insert_at(key, value, index)
     if index.zero?
-      @head = Node.new(value, @head)
-      @tail = Node.new(value) if @tail.nil?
+      @head = Node.new(key, value, @head)
+      @tail = Node.new(key, value) if @tail.nil?
     elsif index > size - 1 || index.negative?
       puts 'Index is out of range'
     else
       prev_node = at(index - 1)
-      new_node = Node.new(value, at(index))
+      new_node = Node.new(key, value, at(index))
       prev_node.next_node = new_node
     end
   end
@@ -89,13 +86,9 @@ class LinkedList
     return @head = @head.next_node if index.zero?
 
     prev_node = at(index - 1)
-    if at(index) == @tail
-      @tail = prev_node
-      @tail.next_node = nil
-    else
-      node_to_remove = at(index)
-      prev_node.next_node = node_to_remove.next_node
-    end
+    @tail = prev_node if at(index) == @tail
+    node_to_remove = at(index)
+    prev_node.next_node = node_to_remove.next_node
   end
 
   def to_s

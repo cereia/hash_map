@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative 'lib/hash_map'
+require_relative 'lib/hash_map/linked_list'
+require_relative 'lib/hash_map/node'
 
 test = HashMap.new
 test.set('apple', 'red')
