@@ -2,9 +2,9 @@
 
 # linked list data structure class
 class LinkedList
-  attr_reader :head, :tail
+  attr_reader :head, :tail, :key, :value
 
-  def initialize(key, value)
+  def initialize(key = nil, value = nil)
     @key = key
     @value = value
     @head = nil
@@ -57,13 +57,11 @@ class LinkedList
 
   def find(key)
     curr = @head
-    i = 0
 
     until curr.nil?
-      return i if curr.key == key
+      return curr if curr.key == key
 
       curr = curr.next_node
-      i += 1
     end
     nil if curr.nil?
   end
