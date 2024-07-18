@@ -15,16 +15,18 @@ test.set('grape', 'purple')
 test.set('hat', 'black')
 test.set('ice cream', 'white')
 test.set('jacket', 'blue')
-test.set('pplea', 'pink')
 test.set('kite', 'pink')
-# test.set('lion', 'golden')
-# puts test.get('apple')
-# p test.get('oreo')
-# puts test.has?('apple')
-# puts test.has?('oreo')
-# p "remove apple: #{test.remove('apple')}"
-# p "remove oreo: #{test.remove('oreo')}"
-# puts "get apple: #{test.get('apple')}"
+test.set('lion', 'golden')
+test.set('moon', 'silver')
+puts "get apple #{test.get('apple')}"
+p test.get('oreo')
+puts "has apple?: #{test.has?('apple')}"
+puts "has oreo?: #{test.has?('oreo')}"
+puts "remove apple: #{test.remove('apple')}"
+p test.remove('oreo')
+puts "get apple: #{test.get('apple')}"
 puts "entries: #{test.entries}"
 puts "keys: #{test.keys}"
 puts "values: #{test.values}"
+puts "length: #{test.length}"
+puts "test: #{test}"

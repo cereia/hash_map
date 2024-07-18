@@ -19,14 +19,9 @@ class HashMap
     hash_code
   end
 
-  def count_full_buckets
-    # remove all buckets that are nil and count the full buckets
-    @buckets.reject(&:nil?).count
-  end
-
   def set(key, value)
     index = hash_index(key)
-    grow_buckets if count_full_buckets > @capacity * @load_factor
+    grow_buckets if full_capacity?
 
     # if the bucket doesn't exist, make a new linked list and append the key value pair
     if @buckets[index].nil?
@@ -53,16 +48,16 @@ class HashMap
   def remove(key)
     index = hash_index(key)
 
-    return nil if @buckets[index].nil?
+    return nil unless has?(key)
 
     value = @buckets[index].find(key).value
     @buckets[index].remove(key)
     value
   end
 
-  # use keys to build length
-  # should return the number of keys saved
-  def length; end
+  def length
+    keys.count
+  end
 
   def clear
     @buckets = Array.new(INITIAL_CAPACITY)
@@ -85,17 +80,28 @@ class HashMap
     end
   end
 
-  # def grow_buckets
-  #   @capacity *= 2
-  #   saved_entries = entries
-  #   @buckets = Array.new(@capacity)
-  #   saved_entries.each { |key, value| set(key, value) }
-  # end
+  private
+
+  def grow_buckets
+    puts 'Buckets are growing...'
+    @capacity *= 2
+    saved_entries = entries
+    @buckets = Array.new(@capacity)
+    saved_entries.each { |key, value| set(key, value) }
+  end
 
   def hash_index(key)
     index = hash(key) % @capacity
     raise IndexError if index.negative? || index >= @buckets.length
 
     index
+  end
+
+  def full_capacity?
+    length >= @capacity * @load_factor
+  end
+
+  def to_s
+    @buckets.each { |bucket| puts bucket unless bucket.nil? }
   end
 end
