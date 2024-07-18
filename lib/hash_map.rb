@@ -23,23 +23,23 @@ class HashMap
   end
 
   def set(key, value)
-    hash_key = hash(key)
+    index = hash_index(key)
 
     # if the bucket doesn't exist, make a new linked list and append the key value pair
-    if @buckets[hash_key].nil?
-      @buckets[hash_key] = LinkedList.new
-      @buckets[hash_key].append(key, value)
+    if @buckets[index].nil?
+      @buckets[index] = LinkedList.new
+      @buckets[index].append(key, value)
     else
       # if you can find the key in the existing entries, set that value to new value
       # else, just append the new key value pair
-      entry = @buckets[hash_key].find(key)
-      entry ? entry.value = value : @buckets[hash_key].append(key, value)
+      entry = @buckets[index].find(key)
+      entry ? entry.value = value : @buckets[index].append(key, value)
     end
   end
 
   def get(key)
-    hash_key = hash(key)
-    !@buckets[hash_key]&.find(key).nil? ? @buckets[hash_key].find(key) : nil
+    index = hash_index(key)
+    !@buckets[index]&.find(key).nil? ? @buckets[index].find(key) : nil
   end
 
   def has?(key)
@@ -53,5 +53,10 @@ class HashMap
 
   # end
 
-  #   raise IndexError if index.negative? || index >= @buckets.length
+  def hash_index(key)
+    index = hash(key) % @capacity
+    raise IndexError if index.negative? || index >= @buckets.length
+
+    index
+  end
 end
