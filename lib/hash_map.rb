@@ -2,8 +2,10 @@
 
 # a data structure that takes a key value pair, produces a hash code, and stores the pair in a bucket
 class HashMap
+  INITIAL_CAPACITY = 16
+
   def initialize
-    @capacity = 16
+    @capacity = INITIAL_CAPACITY
     @buckets = Array.new(@capacity)
     @load_factor = 0.75
   end
@@ -24,6 +26,7 @@ class HashMap
 
   def set(key, value)
     index = hash_index(key)
+    grow_buckets if count_full_buckets > @capacity * @load_factor
 
     # if the bucket doesn't exist, make a new linked list and append the key value pair
     if @buckets[index].nil?
@@ -47,10 +50,35 @@ class HashMap
     present ? true : false
   end
 
+  def remove(key)
+    index = hash_index(key)
+
+    return nil if @buckets[index].nil?
+
+    value = @buckets[index].find(key).value
+    @buckets[index].remove(key)
+    value
+  end
+
+  # use keys to build length
+  # should return the number of keys saved
+  def length; end
+
+  def clear
+    @buckets = Array.new(INITIAL_CAPACITY)
+  end
+
+  def keys; end
+
+  def values; end
+
+  def entries; end
+
   # def grow_buckets
   #   @capacity *= 2
-  #   @new_buckets = Array.new(@capacity)
-
+  #   saved_entries = entries
+  #   @buckets = Array.new(@capacity)
+  #   saved_entries.each { |key, value| set(key, value) }
   # end
 
   def hash_index(key)

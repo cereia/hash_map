@@ -22,25 +22,25 @@ class LinkedList
   end
 
   def size
-    curr = @head
+    node = @head
     nodes = 0
-    until curr.nil?
+    until node.nil?
       nodes += 1
-      curr = curr.next_node
+      node = node.next_node
     end
     nodes
   end
 
   def at(index)
-    curr = @head
+    node = @head
     i = 0
     return 'Out of range' if index > size - 1 || index.negative?
 
     while i < index
-      curr = curr.next_node
+      node = node.next_node
       i += 1
     end
-    curr if i == index
+    node if i == index
   end
 
   def pop
@@ -53,15 +53,14 @@ class LinkedList
     index.nil? ? false : true
   end
 
-  def find(key)
-    curr = @head
+  def find(key, node = @head)
+    return nil if node.nil?
 
-    until curr.nil?
-      return curr if curr.key == key
+    return node if node.key == key
 
-      curr = curr.next_node
-    end
-    nil if curr.nil?
+    return nil if node == @tail
+
+    find(key, node.next_node)
   end
 
   def insert_at(key, value, index)
@@ -77,6 +76,17 @@ class LinkedList
     end
   end
 
+  def remove(key)
+    @head.key == key ? remove_at(0) : remove_at(find_index(key))
+  end
+
+  def find_index(key, index = 0, node = @head)
+    return nil if node.nil?
+    return index if node.key == key
+
+    find_index(key, index + 1, node.next_node)
+  end
+
   def remove_at(index)
     return puts 'Index is out of range' if index > size - 1 || index.negative?
     return @head = @head.next_node if index.zero?
@@ -88,13 +98,13 @@ class LinkedList
   end
 
   def to_s
-    curr = @head
+    node = @head
     str = ''
-    until curr.nil?
-      str += "#{curr} -> "
-      curr = curr.next_node
+    until node.nil?
+      str += "#{node} -> "
+      node = node.next_node
     end
-    str += 'nil' if curr.nil?
+    str += 'nil' if node.nil?
     str
   end
 end
