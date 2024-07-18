@@ -97,6 +97,15 @@ class LinkedList
     prev_node.next_node = node_to_remove.next_node
   end
 
+  def each
+    node = @head
+
+    while node
+      yield(node)
+      node = node.next_node
+    end
+  end
+
   def to_s
     node = @head
     str = ''

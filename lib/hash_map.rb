@@ -68,11 +68,22 @@ class HashMap
     @buckets = Array.new(INITIAL_CAPACITY)
   end
 
-  def keys; end
+  def keys
+    entries.map(&:first)
+  end
 
-  def values; end
+  def values
+    entries.map(&:last)
+  end
 
-  def entries; end
+  # use entries to write keys and values methods
+  def entries
+    @buckets.each_with_object([]) do |bucket, array|
+      next unless bucket
+
+      bucket.each { |entry| array << [entry.key, entry.value] }
+    end
+  end
 
   # def grow_buckets
   #   @capacity *= 2
